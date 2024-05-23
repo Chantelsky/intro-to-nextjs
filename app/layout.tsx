@@ -24,17 +24,24 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <header>
-          <nav>
-            <ul className="flex items-center">
+          <nav className="flex items-center justify-center p-6 lg:px-8">
+            <ul className="flex items-center space-x-4">
               {links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link href={link.href} className="-m-1.5 p-1.5">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
         </header>
         {children}
+        <footer className="bg-black text-white p-4 fixed bottom-0 w-full">
+          <div className="container mx-auto text-center">
+            <p>© 2024 Your Company</p>
+          </div>
+        </footer>
       </body>
     </html>
   )

@@ -15,4 +15,5 @@ model Todo {
   createdAt DateTime @default(now())
   content String
   completed Boolean @default(false)
+  completedAt DateTime?
 }

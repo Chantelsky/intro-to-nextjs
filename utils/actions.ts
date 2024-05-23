@@ -13,11 +13,25 @@ export const newTodo = async (formData) => {
   return todo
 }
 
-export const completeTodo = async (id: string) => {
-  await db.todo.update({
-    where: { id },
-    data: { completed: true },
-  })
+export const toggleTodoCompletion = async (id: string) => {
+  const todo = await db.todo.findUnique({ where: { id } })
 
+  if (todo) {
+    await db.todo.update({
+      where: { id },
+      data: {
+        completed: !todo.completed,
+        completedAt: todo.completed ? null : new Date(),
+      },
+    })
+  }
+
+  revalidatePath('/todos')
+}
+
+export const removeTodo = async (id: string) => {
+  await db.todo.delete({
+    where: { id },
+  })
   revalidatePath('/todos')
 }
